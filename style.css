@@ -1,0 +1,240 @@
+/* Import unique and modern Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Righteous&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    /* Animated Gradient Background */
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #6dd5ed, #2193b0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Background Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Form Styles --- */
+#weatherForm {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    z-index: 10;
+    perspective: 1000px;
+}
+
+#city {
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    /* 3D Inset Shadow for depth */
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.2), 
+                inset -4px -4px 10px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+}
+
+#city::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#city:focus {
+    transform: translateZ(10px);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), 
+                inset -2px -2px 5px rgba(255, 255, 255, 0.2),
+                0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+#search {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    color: #333;
+    cursor: pointer;
+    /* 3D Button pop effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 
+                0 6px 6px rgba(0, 0, 0, 0.2), 
+                inset 0 -4px 0 rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif;
+}
+
+#search:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 
+                0 10px 10px rgba(0, 0, 0, 0.2), 
+                inset 0 -4px 0 rgba(0,0,0,0.1);
+}
+
+#search:active {
+    /* Button press animation */
+    transform: translateY(2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 
+                0 2px 2px rgba(0, 0, 0, 0.2), 
+                inset 0 -2px 0 rgba(0,0,0,0.1);
+}
+/* --- Welcome Message Styles --- */
+#welcomeText {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.5;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    transform: translateZ(30px); /* Keeps the 3D pop effect */
+    animation: floatEmoji 3s ease-in-out infinite; /* Optional: adds a gentle bobbing motion */
+}
+/* --- Card Styles (3D Glassmorphism) --- */
+#card {
+    /* Display is handled by JS, default is empty/hidden */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    padding: 40px;
+    width: 90%;
+    max-width: 450px;
+    /* Massive shadow to lift it off the background */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(5deg);
+    /* Springy entrance animation */
+    animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* 3D Pop-in Animation */
+@keyframes popIn {
+    0% { opacity: 0; transform: perspective(1000px) rotateX(-20deg) translateY(50px) scale(0.8); }
+    100% { opacity: 1; transform: perspective(1000px) rotateX(5deg) translateY(0) scale(1); }
+}
+
+#card:hover {
+    transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+    transition: transform 0.5s ease;
+}
+
+/* --- Weather Info Elements --- */
+#cityDisplay {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    transform: translateZ(30px); /* Pushes text forward in 3D space */
+}
+
+#tempDisplay {
+    font-family: 'Righteous', cursive;
+    font-size: 5rem;
+    margin: 15px 0;
+    /* Chrome/gradient text effect */
+    background: -webkit-linear-gradient(#fff, #e0e0e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.4));
+    transform: translateZ(50px);
+}
+
+#humidityDisplay {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #f0f0f0;
+    transform: translateZ(20px);
+}
+
+#descDisplay {
+    font-size: 1.5rem;
+    font-style: italic;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    transform: translateZ(25px);
+}
+
+#weatherEmoji {
+    font-size: 7rem;
+    margin: 0;
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
+    animation: floatEmoji 3.5s ease-in-out infinite;
+    transform: translateZ(60px);
+}
+
+/* Floating Animation for Emoji */
+@keyframes floatEmoji {
+    0%, 100% { transform: translateZ(60px) translateY(0px); }
+    50% { transform: translateZ(60px) translateY(-20px); }
+}
+
+/* --- Error Handling --- */
+#displayError {
+    font-size: 1.5rem;
+    color: #ff6b6b;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Head-shake animation on error */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+/* --- Fully Responsive Design --- */
+@media (max-width: 500px) {
+    #weatherForm {
+        flex-direction: column;
+        width: 90%;
+        max-width: 450px;
+    }
+    
+    #search {
+        width: 100%;
+    }
+    
+    #card {
+        padding: 30px 20px;
+    }
+
+    #tempDisplay {
+        font-size: 4rem;
+    }
+    
+    #cityDisplay {
+        font-size: 2rem;
+    }
+    
+    #weatherEmoji {
+        font-size: 5rem;
+    }
+}
