@@ -20,7 +20,7 @@ weatherForm.addEventListener("submit", async e => {
 
 async function getWeatherData(city) {
     // Step 1: Get latitude & longitude
-    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
+    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
     
     const geoResponse = await fetch(geoUrl);
     const geoData = await geoResponse.json();
